@@ -1,10 +1,9 @@
 import { messagesMock } from "../mock-data/mock-data"
 
 const SET_MESSAGES = "chat-reducer/SET_MESSAGES"
+const ADD_MESSAGE = "chat-reducer/ADD_MESSAGE"
 
 const initialState = {
-  userId: null,
-  chatType: null, // 'work' || 'basic'
   messages: []
 }
 
@@ -15,17 +14,31 @@ const chatReducer = (state = initialState, action) => {
         ...state,
         messages: [...action.messages]
       }
+    case ADD_MESSAGE:
+      return {
+        ...state,
+        messages: [...state.messages, action.message]
+      }
     default: return state
   }
 }
 
-export const setMessages = messages => ({
+export const setMessagesAC = messages => ({
   type: SET_MESSAGES,
   messages
 })
 
+export const addMessageAC = message => ({
+  type: ADD_MESSAGE,
+  message
+})
+
 export const getMessagesTC = () => dispatch => {
-  dispatch(setMessages(messagesMock)) // здесь будет асинхронный запрос
+  dispatch(setMessagesAC(messagesMock)) // здесь будет асинхронный GET запрос
+}
+
+export const addMessageTC = (message) => dispatch => {
+  dispatch(addMessageAC(message)) // здесь будет асинхронный PUT запрос
 }
 
 export default chatReducer

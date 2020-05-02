@@ -29,7 +29,8 @@ const contactsReducer = (state = initialState, action) => {
     case SET_CURRENT_INTERLOCUTOR:
       return {
         ...state,
-        currentInterlocutor: action.InterlocutorId}
+        currentInterlocutor: action.InterlocutorId
+      }
     case SET_CONTACTS:
       return {
         ...state,
@@ -58,18 +59,19 @@ export const setContactsAC = (contacts) => ({
 })
 
 export const getCurrentInterlocutorTC = () => (dispatch) => {
-  dispatch(setCurrentInterlocutorAC(431562)) // здесь будет асинхронный запрос
+  let response = 431562
+  dispatch(setCurrentInterlocutorAC(response)) // здесь будет асинхронный GET запрос
 }
 
 export const getContactsTC = () => (dispatch) => {
-  dispatch(setContactsAC(contactsMock)) // здесь будет асинхронный запрос
+  dispatch(setContactsAC(contactsMock)) // здесь будет асинхронный GET запрос
 }
 
 export const initializeAppTC = () => dispatch => {
   dispatch(setCurrentChatTypeAC('work'))
-  getCurrentInterlocutorTC() // здесь будет асинхронный запрос
-  getContactsTC() // здесь будет асинхронный запрос
-  getMessagesTC() // здесь будет асинхронный запрос
+  dispatch(getCurrentInterlocutorTC()) // здесь будет асинхронный запрос
+  dispatch(getContactsTC()) // здесь будет асинхронный запрос
+  dispatch(getMessagesTC()) // здесь будет асинхронный запрос
   dispatch(setAppInitializedAC())
 }
 

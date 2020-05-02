@@ -3,15 +3,18 @@
 export const messagesMock = [
   {
     date: 1588397967,
-    text: "сообщение 1"
+    text: "сообщение 1",
+    direction: "income"
   },
   {
     date: 1588398066,
-    text: "сообщение 2"
+    text: "сообщение 2",
+    direction: "income"
   },
   {
     date: 1588399095,
-    text: "сообщение 3"
+    text: "сообщение 3",
+    direction: "income"
   },
 ] 
 

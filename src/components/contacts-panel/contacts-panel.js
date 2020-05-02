@@ -14,7 +14,7 @@ const ContactsPanel = ({contacts}) => {
       <div>
         {contacts.map(contact => {
           return (
-            <div className={styles.contact}>
+            <div className={styles.contact} key={contact.id}>
               <img className={styles.avatar} src={contact.avatar} alt={`avatar ${contact.name}`}/>
               <span>{contact.name}</span>
             </div>

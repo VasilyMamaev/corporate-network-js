@@ -10,6 +10,7 @@ function App({initialized, initializeApp}) {
   useEffect(() => {
     initializeApp()
   }, [])
+  
   return (
     <>
     {
