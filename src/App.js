@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Sidebar from "./components/sidebar/sidebar";
+import ContactsPanel from "./components/contacts-panel/contacts-panel";
+import Chat from "./components/chat/chat";
+import { connect } from "react-redux";
+import { initializeAppTC } from "./redux/contacts-reducer";
 
-function App() {
+function App({initialized, initializeApp}) {
+
+  useEffect(() => {
+    initializeApp()
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {
+    !initialized
+      ? <p>loader stub</p>
+      : <div className="mainWrapper">
+          <Sidebar />
+          <ContactsPanel />
+          <Chat />
+        </div>
+    }
+    </>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  initialized: state.contacts.appInitialized
+})
+
+export default connect(mapStateToProps, {initializeApp: initializeAppTC}) (App);
