@@ -5,16 +5,21 @@ import Message from './message/message'
 import MessageCreator from './message-creator/message-creator'
 import { addMessageTC } from '../../redux/chat-reducer'
 
-const Chat = ({messages, addMessage}) => {
+const Chat = ({messages, addMessage, interlocutorId, contacts, chatType}) => {
+
+  const interlocutor = contacts.find(c => c.id === interlocutorId).name
+
   return (
     <div className={styles.wrapper}>
       <section className={styles.messages}>
         {messages.map(message => (
-          <Message message={message} key={message.date} />
+          chatType === message.type 
+            ? <Message message={message} key={message.date} interlocutor={interlocutor} chatType={chatType} />
+            : null
         ))}
       </section>
       <div className={styles.messageCreator}>
-        <MessageCreator addMessage={addMessage} />
+        <MessageCreator addMessage={addMessage} chatType={chatType} />
       </div>
     </div>
   )
@@ -22,7 +27,10 @@ const Chat = ({messages, addMessage}) => {
 
 const mapStateToProps = state => {
   return {
-    messages: state.chat.messages
+    messages: state.chat.messages,
+    chatType: state.contacts.currentChatType,
+    interlocutorId: state.contacts.currentInterlocutor,
+    contacts: state.contacts.contacts
   }
 }
 

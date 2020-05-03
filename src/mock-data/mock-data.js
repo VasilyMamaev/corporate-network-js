@@ -2,21 +2,95 @@
 
 export const messagesMock = [
   {
-    date: 1588397967,
-    text: "сообщение 1",
-    direction: "income"
+    id: 431561,
+    messages: [
+      {
+        date: 1588397967,
+        text: "сообщение 1",
+        direction: "income",
+        type: "basic"
+      },
+      {
+        date: 1588398066,
+        text: "сообщение 2",
+        direction: "income",
+        type: "basic"
+      },
+      {
+        date: 1588399095,
+        text: "сообщение 3",
+        direction: "income",
+        type: "basic"
+      },
+      {
+        date: 1588398066,
+        text: "сообщение 2",
+        direction: "income",
+        type: "work"
+      },
+      {
+        date: 1588399095,
+        text: "сообщение 3",
+        direction: "outcome",
+        type: "work"
+      },
+    ] 
   },
   {
-    date: 1588398066,
-    text: "сообщение 2",
-    direction: "income"
+    id: 431562,
+    messages: [
+      {
+        date: 1588397967,
+        text: "сообщение 4",
+        direction: "income",
+        type: "work"
+      },
+      {
+        date: 1588398066,
+        text: "сообщение 5",
+        direction: "outcome",
+        type: "work"
+      },
+      {
+        date: 1588399095,
+        text: "сообщение 6",
+        direction: "income",
+        type: "work"
+      },
+    ] 
   },
   {
-    date: 1588399095,
-    text: "сообщение 3",
-    direction: "income"
+    id: 431563,
+    messages: [
+      {
+        date: 1588397967,
+        text: "сообщение 7",
+        direction: "outcome",
+        type: "work"
+      },
+      {
+        date: 1588398066,
+        text: "сообщение 8",
+        direction: "income",
+        type: "work"
+      },
+      {
+        date: 1588398066,
+        text: "сообщение 8",
+        direction: "income",
+        type: "basic"
+      },
+      {
+        date: 1588399095,
+        text: "сообщение 9",
+        direction: "outcome",
+        type: "work"
+      },
+    ] 
   },
-] 
+]
+
+
 
 export const contactsMock = [
   {

@@ -23,9 +23,9 @@ const chatReducer = (state = initialState, action) => {
   }
 }
 
-export const setMessagesAC = messages => ({
+export const setMessagesAC = contact => ({
   type: SET_MESSAGES,
-  messages
+  messages: contact.messages
 })
 
 export const addMessageAC = message => ({
@@ -33,8 +33,9 @@ export const addMessageAC = message => ({
   message
 })
 
-export const getMessagesTC = () => dispatch => {
-  dispatch(setMessagesAC(messagesMock)) // здесь будет асинхронный GET запрос
+export const getMessagesTC = (id = 431561) => dispatch => {
+  const messages = messagesMock.find(msgs => msgs.id === id)
+  dispatch(setMessagesAC(messages)) // здесь будет асинхронный GET запрос
 }
 
 export const addMessageTC = (message) => dispatch => {

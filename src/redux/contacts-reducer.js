@@ -58,8 +58,8 @@ export const setContactsAC = (contacts) => ({
   contacts
 })
 
-export const getCurrentInterlocutorTC = () => (dispatch) => {
-  let response = 431562
+export const getCurrentInterlocutorTC = (id = 431561) => (dispatch) => {
+  let response = id
   dispatch(setCurrentInterlocutorAC(response)) // здесь будет асинхронный GET запрос
 }
 

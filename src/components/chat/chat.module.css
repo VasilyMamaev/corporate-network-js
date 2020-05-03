@@ -1,0 +1,13 @@
+.messages {
+  margin: 2%;
+  padding: 1%;
+  background-color:#fafafa;
+  border: solid 2px #bdbdbd;
+  border-radius: 10px;
+  max-height: 80vh;
+  min-height: 70vh;
+  overflow-y: scroll;
+
+  display:flex;
+  flex-direction: column;
+}

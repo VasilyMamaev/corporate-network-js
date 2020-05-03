@@ -1,0 +1,25 @@
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modalCross {
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  right: 5%;
+  top: 5%;
+}
+
+.modalImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 80%;
+  max-width: 80%;
+}
