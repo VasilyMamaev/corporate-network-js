@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import styles from './chat.module.css' 
 import Message from './message/message'
 import MessageCreator from './message-creator/message-creator'
-import { addMessageTC } from '../../redux/chat-reducer'
+import { addMessageTC, deleteMessageAC } from '../../redux/chat-reducer'
 
-const Chat = ({messages, addMessage, interlocutorId, contacts, chatType}) => {
+const Chat = ({messages, addMessage, interlocutorId, contacts, chatType, deleteMessage}) => {
 
   const interlocutor = contacts.find(c => c.id === interlocutorId).name
 
@@ -14,7 +14,8 @@ const Chat = ({messages, addMessage, interlocutorId, contacts, chatType}) => {
       <section className={styles.messages}>
         {messages.map(message => (
           chatType === message.type 
-            ? <Message message={message} key={message.date} interlocutor={interlocutor} chatType={chatType} />
+            ? <Message message={message} key={message.date} interlocutor={interlocutor}
+              chatType={chatType} deleteMessage={deleteMessage} />
             : null
         ))}
       </section>
@@ -34,4 +35,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {addMessage: addMessageTC})(Chat)
+export default connect(mapStateToProps, {
+  addMessage: addMessageTC,
+  deleteMessage: deleteMessageAC
+})(Chat)

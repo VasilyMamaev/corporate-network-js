@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./message.module.css";
 import Portal from "../../portal/portal";
 
-const Message = ({ message, interlocutor }) => {
+const Message = ({ message, interlocutor, deleteMessage }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const showHandler = () => setModalVisible(true);
@@ -19,7 +19,10 @@ const Message = ({ message, interlocutor }) => {
 
   return (
     <article className={`${styles.message} ${styles[message.direction]}`}>
-      <span>{message.direction === "outcome" ? "Вы" : `${interlocutor}`}</span>
+      <div className={styles.header}>
+        <span>{message.direction === "outcome" ? "Вы" : `${interlocutor}`}</span>
+        <i className="material-icons" onClick={() => deleteMessage(message.date)}>clear</i>
+      </div>
       <p>
         {message.image ? (
           <img alt="img" src={message.image} onClick={showHandler} width="40" />

@@ -37,3 +37,11 @@
   align-self: flex-end;
   background-color: #bbdefb;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.header i {
+  cursor: pointer;
+}
