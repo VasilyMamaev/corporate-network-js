@@ -37,21 +37,23 @@ const Message = React.memo(
           <span>
             {message.direction === "outcome" ? "Вы" : `${interlocutor}`}
           </span>
-          {message.direction === "outcome" ? (
+          <div>
+            {message.direction === "outcome" ? (
+              <i
+                className="material-icons"
+                onClick={() => setMessageOnEdit(true)}
+              >
+                edit
+              </i>
+            ) : null}
+
             <i
               className="material-icons"
-              onClick={() => setMessageOnEdit(true)}
+              onClick={() => deleteMessage(message.date)}
             >
-              edit
+              clear
             </i>
-          ) : null}
-
-          <i
-            className="material-icons"
-            onClick={() => deleteMessage(message.date)}
-          >
-            clear
-          </i>
+          </div>
         </div>
         {messageOnEdit ? (
           <input
