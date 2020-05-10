@@ -1,39 +1,39 @@
-import React from 'react'
-import styles from './sidebar.module.css'
-import workyUser from '../../assets/workyUser.png'
-import user from '../../assets/user.png'
-import { connect } from 'react-redux'
-import { setCurrentChatTypeAC } from '../../redux/contacts-reducer'
+import React from "react";
+import styles from "./sidebar.module.css";
+import workyUser from "../../assets/workyUser.png";
+import user from "../../assets/user.png";
+import { connect } from "react-redux";
+import { setCurrentChatTypeAC } from "../../redux/contacts-reducer";
 
-
-
-function Sidebar({type,setCurrentChat}) {
-
+function Sidebar({ type, setCurrentChat }) {
   const clickHandler = (type) => {
-    setCurrentChat(type)
-  }
+    setCurrentChat(type);
+  };
 
   return (
     <div className={styles.wrapper}>
-      <div 
-        className={`${styles.item} ${type === "work" ? styles.active : null}`}
+      <div
+        className={`${styles.item} ${type === "work" ? styles.active : ''}`}
         onClick={() => clickHandler("work")}
       >
-        <img src={workyUser} alt="pic" style={{width: 40, height: 40}} />
+        <img className={styles.img} src={workyUser} alt="pic" />
         рабочая переписка
       </div>
       <div
-        className={`${styles.item} ${type === "basic" ? styles.active : null}`}
-        onClick={() => clickHandler("basic")}>
-      <img src={user} alt="pic" style={{width: 40, height: 40}} />
+        className={`${styles.item} ${type === "basic" ? styles.active : ''}`}
+        onClick={() => clickHandler("basic")}
+      >
+        <img className={styles.img} src={user} alt="pic" />
         нерабочая переписка
       </div>
     </div>
-  )
+  );
 }
 
 const mapStateToProps = (state) => ({
-  type: state.contacts.currentChatType
-})
+  type: state.contacts.currentChatType,
+});
 
-export default connect(mapStateToProps, {setCurrentChat: setCurrentChatTypeAC})(Sidebar)
+export default connect(mapStateToProps, {
+  setCurrentChat: setCurrentChatTypeAC,
+})(Sidebar);

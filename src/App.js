@@ -5,29 +5,30 @@ import Chat from "./components/chat/chat";
 import { connect } from "react-redux";
 import { initializeAppTC } from "./redux/contacts-reducer";
 
-function App({initialized, initializeApp}) {
-
+function App({ initialized, initializeApp }) {
   useEffect(() => {
-    initializeApp()
-  }, [])
-  
+    initializeApp();
+  }, []);
+
   return (
     <>
-    {
-    !initialized
-      ? <p>loader stub</p>
-      : <div className="mainWrapper">
+      {!initialized ? (
+        <p>loader stub</p>
+      ) : (
+        <div className="mainWrapper">
           <Sidebar />
           <ContactsPanel />
           <Chat />
         </div>
-    }
+      )}
     </>
   );
 }
 
-const mapStateToProps = state => ({
-  initialized: state.contacts.appInitialized
-})
+const mapStateToProps = (state) => ({
+  initialized: state.contacts.appInitialized,
+});
 
-export default connect(mapStateToProps, {initializeApp: initializeAppTC}) (App);
+export default connect(mapStateToProps, { initializeApp: initializeAppTC })(
+  App
+);

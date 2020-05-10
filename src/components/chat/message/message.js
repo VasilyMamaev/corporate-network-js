@@ -2,41 +2,86 @@ import React, { useState } from "react";
 import styles from "./message.module.css";
 import Portal from "../../portal/portal";
 
-const Message = ({ message, interlocutor, deleteMessage }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
+const Message = React.memo(
+  ({ message, interlocutor, deleteMessage, editMessage }) => {
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [messageOnEdit, setMessageOnEdit] = useState(false);
+    const [messageEdit, setMessageEdit] = useState(message.text);
 
-  const showHandler = () => setModalVisible(true);
-  const exitHandler = () => setModalVisible(false);
+    const exitHandler = () => setModalVisible(false);
+    const onEditKeyHandler = (evt) => {
+      if (evt.key === "Escape") {
+        setMessageOnEdit(false);
+        setMessageEdit(message.text);
+      }
+      if (evt.key === "Enter") {
+        if (messageEdit) {
+          editMessage(message.date, messageEdit);
+          setMessageOnEdit(false);
+        } else {
+          deleteMessage(message.date);
+        }
+      }
+    };
 
-  const convertTimestamp = (timestamp) => {
-    const date = new Date( timestamp * 1000 );
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-    // показываем в нужном формате: 11:17:23 
-    return hours + ':' + minutes + ':' + seconds ;
-  }
+    const convertTimestamp = (timestamp) => {
+      let time = new Date(timestamp);
+      let hours = time.getHours();
+      let minutes = time.getMinutes();
+      return "" + hours + ":" + minutes;
+    };
 
-  return (
-    <article className={`${styles.message} ${styles[message.direction]}`}>
-      <div className={styles.header}>
-        <span>{message.direction === "outcome" ? "Вы" : `${interlocutor}`}</span>
-        <i className="material-icons" onClick={() => deleteMessage(message.date)}>clear</i>
-      </div>
-      <p>
-        {message.image ? (
-          <img alt="img" src={message.image} onClick={showHandler} width="40" />
+    return (
+      <article className={`${styles.message} ${styles[message.direction]}`}>
+        <div className={styles.header}>
+          <span>
+            {message.direction === "outcome" ? "Вы" : `${interlocutor}`}
+          </span>
+          {message.direction === "outcome" ? (
+            <i
+              className="material-icons"
+              onClick={() => setMessageOnEdit(true)}
+            >
+              edit
+            </i>
+          ) : null}
+
+          <i
+            className="material-icons"
+            onClick={() => deleteMessage(message.date)}
+          >
+            clear
+          </i>
+        </div>
+        {messageOnEdit ? (
+          <input
+            type="text"
+            value={messageEdit}
+            autoFocus
+            onChange={(evt) => setMessageEdit(evt.target.value)}
+            onBlur={() => setMessageOnEdit(false)}
+            onKeyUp={onEditKeyHandler}
+          />
+        ) : (
+          <p>
+            {message.image ? (
+              <img
+                alt="img"
+                src={message.image}
+                onClick={() => setModalVisible(true)}
+                width="40"
+              />
+            ) : null}
+            {message.text}
+          </p>
+        )}
+        <small>{convertTimestamp(message.date)}</small>
+        {isModalVisible ? (
+          <Portal exitHandler={exitHandler} img={message.image} />
         ) : null}
-        {message.text}
-      </p>
-      <small>
-        {convertTimestamp(message.date)}
-      </small>
-      {isModalVisible ? (
-        <Portal exitHandler={exitHandler} img={message.image} />
-      ) : null}
-    </article>
-  );
-};
+      </article>
+    );
+  }
+);
 
 export default Message;

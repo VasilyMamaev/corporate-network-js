@@ -11,14 +11,16 @@ const MessageCreator = ({ addMessage, chatType }) => {
   const sendMessageHandler = () => {
     if (text) {
       addMessage({
-        date: Date.now(),
+        date: new Date(
+          
+        ),
         text: text,
         direction: "outcome",
         type: chatType,
         image,
       });
       setText("");
-      setImage(null)
+      setImage(null);
     }
   };
   const keyEnterPressHandler = (evt) => {
@@ -31,15 +33,14 @@ const MessageCreator = ({ addMessage, chatType }) => {
     const file = evt.target.files[0];
     const reader = new FileReader();
     reader.onload = function (evt) {
-      setImage(evt.target.result)
+      setImage(evt.target.result);
     };
 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
   };
 
   return (
     <div className={styles.messageCreator}>
-    
       <label className={styles.imgInput}>
         <i className="material-icons">add_photo_alternate</i>
         <input
@@ -64,7 +65,7 @@ const MessageCreator = ({ addMessage, chatType }) => {
         </button>
         <small>Enter + Ctrl</small>
       </div>
-      {image ? <img src={image} alt="img" width="40" height="40"/> : null}
+      {image ? <img src={image} alt="img" width="40" height="40" /> : null}
     </div>
   );
 };
